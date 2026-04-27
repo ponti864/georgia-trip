@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проект Грузия · Лето 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600;1,700&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FDF6EF;--peach:#F9D4C0;--pink:#F2B8C6;--rose:#D4537E;
+  --mint:#B8D8C8;--lav:#D5C8E8;--brown:#3D2B1F;--dusty:#9E7B6A;
+  --text:#5A3E35;--white:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);font-family:'Nunito',sans-serif;color:var(--brown);overflow-x:hidden;}
+
+
+/* CAROUSEL */
+.carousel{position:relative;overflow:hidden;border-radius:0;}
+.carousel-track{display:flex;transition:transform .4s ease;height:100%;}
+.carousel-track img{min-width:100%;width:100%;height:100%;object-fit:cover;flex-shrink:0;}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(253,246,239,.85);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .2s;}
+.carousel-btn:hover{background:rgba(253,246,239,1);}
+.carousel-prev{left:10px;}
+.carousel-next{right:10px;}
+.carousel-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px;}
+.carousel-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.6);cursor:pointer;transition:background .2s;}
+.carousel-dot.active{background:#fff;}
+
+/* PROGRESS */
+#prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--rose),var(--lav));width:0;z-index:9999;transition:width .1s linear;}
+
+/* NAV */
+nav{position:fixed;top:3px;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:14px 40px;background:rgba(253,246,239,.9);backdrop-filter:blur(14px);z-index:999;border-bottom:.5px solid rgba(242,184,198,.3);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--brown);text-decoration:none;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dusty);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--rose);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:100px 32px 80px;}
+.hero-img{position:absolute;inset:0;background-image:url('грузия/SAMEBA.jpg');background-size:cover;background-position:center center;}
+.hero-overlay{position:absolute;inset:0;background:rgba(20,10,5,.25);}
+.hero-content{position:relative;z-index:2;}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dusty);margin-bottom:18px;opacity:0;animation:fadeUp .7s .2s forwards;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(64px,11vw,110px);font-weight:700;color:var(--brown);line-height:.95;margin-bottom:20px;opacity:0;animation:fadeUp .7s .4s forwards;}
+.hero-title em{color:var(--rose);font-style:normal;}
+.hero-sub{font-size:16px;color:var(--dusty);font-weight:400;margin-bottom:44px;opacity:0;animation:fadeUp .7s .6s forwards;}
+.hero-btn{display:inline-block;background:var(--white);color:var(--brown);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;padding:14px 36px;border-radius:50px;text-decoration:none;letter-spacing:.04em;opacity:0;animation:fadeUp .7s .8s forwards;transition:transform .2s,box-shadow .2s;border:.5px solid rgba(212,83,126,.3);}
+.hero-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,83,126,.2);}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .7s 1.2s forwards;}
+.hero-scroll span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dusty);}
+.scroll-line{width:1px;height:40px;background:linear-gradient(var(--rose),transparent);animation:scrollPulse 2s infinite;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes scrollPulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+/* SECTIONS */
+.section{padding:80px 40px;}
+.section-peach{background:#FDF0E8;}
+.section-mint{background:#EDF6F1;}
+.section-mint 
+.section-lav{background:#F2EDF8;}
+.section-white{background:var(--white);}
+
+.block-label{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dusty);margin-bottom:8px;}
+.block-label::before{content:'';display:block;width:24px;height:1px;background:currentColor;}
+.block-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(32px,5vw,48px);color:var(--brown);margin-bottom:6px;}
+.block-subtitle{font-size:14px;color:var(--dusty);margin-bottom:48px;}
+
+/* DAY CARDS */
+.day-card{background:var(--white);border-radius:20px;border:.5px solid rgba(242,184,198,.5);overflow:hidden;margin-bottom:32px;display:grid;grid-template-columns:1fr 1.4fr;opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;}
+.day-card.visible{opacity:1;transform:translateY(0);}
+.day-card.flip{grid-template-columns:1.4fr 1fr;}
+.day-card.flip .day-card.flip .day-content{order:-1;}
+.day-photo{position:relative;overflow:hidden;min-height:280px;}
+.day-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s;}
+.day-card:hover .day-photo img{transform:scale(1.04);}
+.day-badge{position:absolute;top:16px;left:16px;background:rgba(253,246,239,.92);backdrop-filter:blur(8px);padding:6px 14px;border-radius:30px;font-size:11px;font-weight:600;color:var(--rose);letter-spacing:.04em;}
+.day-content{padding:32px;}
+.day-slogan{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dusty);margin-bottom:10px;}
+.day-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:var(--brown);margin-bottom:20px;line-height:1.2;}
+.timeline{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.titem{display:flex;gap:12px;font-size:13px;}
+.ttime{color:var(--rose);font-weight:600;min-width:46px;flex-shrink:0;padding-top:1px;}
+.ttext{color:var(--text);line-height:1.5;}
+.fact-box{background:linear-gradient(135deg,rgba(249,212,192,.25),rgba(242,184,198,.15));border-radius:12px;padding:14px 16px;border-left:3px solid var(--pink);}
+.fact-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);margin-bottom:6px;}
+.fact-text{font-size:12.5px;color:var(--text);line-height:1.6;}
+.price-tag{display:inline-block;background:rgba(184,216,200,.3);color:#085041;font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;margin-top:10px;}
+
+/* MAP SECTION */
+.map-section{position:relative;background:var(--cream);overflow:hidden;}
+.map-wrap{position:relative;width:100%;max-width:900px;margin:0 auto;}
+.map-svg-container{width:100%;position:relative;}
+.map-svg-container svg{width:100%;display:block;}
+
+/* STOP CARDS */
+.stop-popup{position:absolute;background:var(--white);border-radius:16px;border:.5px solid rgba(242,184,198,.6);padding:16px;width:200px;opacity:0;transform:scale(.9);transition:opacity .4s,transform .4s;pointer-events:none;box-shadow:0 4px 20px rgba(212,83,126,.08);}
+.stop-popup.active{opacity:1;transform:scale(1);pointer-events:all;}
+.stop-popup img{width:100%;height:100px;object-fit:cover;border-radius:10px;margin-bottom:10px;}
+.stop-popup .sp-badge{font-size:10px;font-weight:600;color:var(--rose);background:var(--peach);padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:6px;}
+.stop-popup .sp-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--brown);margin-bottom:5px;}
+.stop-popup .sp-fact{font-size:11px;color:var(--text);line-height:1.5;}
+.stop-popup .sp-price{font-size:10px;color:#085041;font-weight:600;margin-top:6px;}
+
+/* BUDGET */
+.budget-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px;}
+.budget-card{background:var(--white);border-radius:16px;border:.5px solid rgba(242,184,198,.4);padding:22px;transition:transform .2s;}
+.budget-card:hover{transform:translateY(-4px);}
+.budget-icon{font-size:24px;margin-bottom:10px;}
+.budget-name{font-size:12px;color:var(--dusty);margin-bottom:6px;font-weight:500;}
+.budget-amount{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--rose);margin-bottom:4px;}
+.budget-note{font-size:11px;color:var(--text);line-height:1.5;}
+.budget-total{background:linear-gradient(135deg,var(--pink),var(--peach));border-radius:16px;padding:24px 32px;display:flex;justify-content:space-between;align-items:center;}
+.bt-label{font-size:13px;font-weight:600;color:#72243E;}
+.bt-amount{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:40px;color:var(--brown);}
+.lifehack{background:rgba(184,216,200,.2);border-radius:12px;padding:16px 20px;margin-top:16px;border-left:3px solid var(--mint);font-size:13px;color:var(--text);line-height:1.6;}
+
+/* CHECKLIST */
+.check-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.check-col h3{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--brown);margin-bottom:16px;}
+.check-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;font-size:13px;color:var(--text);line-height:1.5;}
+.check-dot{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--pink);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;}
+.check-dot::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--pink);}
+
+/* GALLERY */
+.gallery{columns:3;gap:10px;}
+.gallery-item{break-inside:avoid;margin-bottom:10px;border-radius:14px;overflow:hidden;position:relative;}
+.gallery-item img{width:100%;display:block;transition:transform .5s;}
+.gallery-item:hover img{transform:scale(1.05);}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(61,43,31,.6));padding:20px 14px 12px;color:var(--white);font-size:12px;font-weight:500;opacity:0;transition:opacity .3s;}
+.gallery-item:hover .gallery-caption{opacity:1;}
+
+/* EXCURSIONS */
+.exc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.exc-card{background:var(--white);border-radius:16px;border:.5px solid rgba(184,216,200,.6);padding:24px;}
+.exc-day{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#085041;background:rgba(184,216,200,.3);padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:12px;}
+.exc-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--brown);margin-bottom:12px;}
+.exc-option{font-size:12.5px;color:var(--text);padding:6px 0;border-bottom:.5px solid rgba(242,184,198,.3);display:flex;justify-content:space-between;gap:8px;flex-wrap:nowrap;}
+.exc-option:last-of-type{border-bottom:none;}
+.exc-price{font-weight:600;color:var(--rose);}
+.exc-btn{display:block;text-align:center;margin-top:14px;background:var(--cream);color:var(--brown);font-size:12px;font-weight:600;padding:10px;border-radius:30px;text-decoration:none;border:.5px solid rgba(212,83,126,.3);transition:background .2s;}
+.exc-btn:hover{background:var(--peach);}
+
+/* FOOTER */
+footer{background:#F5EDE3;border-top:.5px solid rgba(242,212,220,.6);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-main{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--dusty);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dusty);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--rose);}
+
+@media(max-width:768px){footer{flex-direction:column;text-align:center;padding:24px 20px;gap:10px;}.footer-links{justify-content:center;flex-wrap:wrap;gap:14px;}
+  .day-card,.day-card.flip{grid-template-columns:1fr;}
+  .day-card.flip .day-content{order:0;}
+  .budget-grid{grid-template-columns:repeat(2,1fr);}
+  .check-grid{grid-template-columns:1fr;}
+  .gallery{columns:2;}
+  .exc-grid{grid-template-columns:1fr;}
+  nav{padding:14px 20px;}
+  .section{padding:60px 20px;}
+  .nav-links{display:none;}
+}
+
+.carousel-caption-bar {
+  position:absolute; bottom:0; left:0; right:0;
+  background:linear-gradient(transparent, rgba(61,43,31,.62));
+  padding:22px 16px 10px;
+  color:#fff; font-size:11.5px; font-weight:600;
+  letter-spacing:.04em; pointer-events:none;
+  z-index:5; transition:opacity .3s;
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav>
+  <a class="nav-logo" href="#">Проект Грузия</a>
+  <ul class="nav-links">
+    <li><a href="#route">Маршрут</a></li>
+    <li><a href="#days">По дням</a></li>
+    <li><a href="#budget">Бюджет</a></li>
+    <li><a href="#excursions">Экскурсии</a></li>
+    <li><a href="#checklist">Чеклист</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content" style="background:rgba(253,246,239,.62);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:28px;padding:48px 64px;border:1px solid rgba(255,255,255,.5);">
+    <div class="hero-eyebrow">20–29 Июля · Грузия</div>
+    <h1 class="hero-title">Проект <em>Грузия</em></h1>
+    <p class="hero-sub">9 дней · 5 подруг · 3 главы маршрута</p>
+    <a href="#route" class="hero-btn">Смотреть маршрут ↓</a>
+  </div>
+  <div class="hero-scroll">
+    <span>скролл</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SCROLL MAP -->
+<section id="route" class="section section-white" style="padding-top:80px;padding-bottom:0;">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="block-label">Весь маршрут</div>
+    <h2 class="block-title">Едем по Грузии</h2>
+    <p class="block-subtitle" style="margin-bottom:32px;">Нажми на точку — увидишь локацию</p>
+  </div>
+
+  <div class="map-wrap" id="mapWrap">
+    <div class="map-svg-container">
+<svg viewBox="0 0 860 680" xmlns="http://www.w3.org/2000/svg" id="mapSvg">
+  <rect width="860" height="680" fill="#FDF6EF"/>
+  <!-- ZONE 1 peach — Tbilisi/East -->
+  <rect x="0" y="0" width="860" height="260" fill="#F9D4C0" opacity=".22" rx="0"/>
+  <!-- ZONE 2 mint — West -->
+  <rect x="0" y="260" width="860" height="220" fill="#B8D8C8" opacity=".2" rx="0"/>
+  <!-- ZONE 3 lav — South -->
+  <rect x="0" y="480" width="860" height="200" fill="#D5C8E8" opacity=".22" rx="0"/>
+  <!-- zone labels -->
+  <text x="24" y="26" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="#C4906E" letter-spacing="0.08em" opacity=".9">ГЛАВА 1 · ТБИЛИСИ И ВОСТОК</text>
+  <text x="24" y="278" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="#1D9E75" letter-spacing="0.08em" opacity=".9">ГЛАВА 2 · ЗАПАД · КУТАИСИ</text>
+  <text x="24" y="498" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="#534AB7" letter-spacing="0.08em" opacity=".9">ГЛАВА 3 · ЮГ · БОРЖОМИ · ВАРДЗИЯ</text>
+  <!-- zone dividers -->
+  <line x1="0" y1="260" x2="860" y2="260" stroke="#E8B898" stroke-width="0.5" stroke-dasharray="4,4" opacity=".5"/>
+  <line x1="0" y1="480" x2="860" y2="480" stroke="#C0A8D8" stroke-width="0.5" stroke-dasharray="4,4" opacity=".5"/>
+
+  <!-- DASHED ROAD -->
+  <path id="theRoad" d="M 120,175 C 200,185 260,195 320,193 C 390,190 460,165 560,140 C 600,128 630,112 650,105 C 670,90 680,100 665,130 C 640,170 560,195 500,240 C 460,270 380,300 300,320 C 250,330 210,330 200,330 C 190,340 230,355 300,358 C 380,362 460,362 500,360 C 540,358 580,355 600,370 C 580,400 400,420 300,430 C 220,438 160,435 130,430 C 100,445 90,460 100,490 C 130,530 280,535 380,535 C 420,535 460,535 480,545 C 520,555 600,545 680,545 C 720,545 740,555 680,580 C 620,605 480,625 380,630" stroke="#E8B898" stroke-width="2.5" fill="none" stroke-dasharray="8,6" opacity=".9"/>
+
+  <!-- ILLUSTRATIONS ON MAP -->
+
+  <!-- 1: Tbilisi balcony — левый низ зоны 1 -->
+  <image href="грузия/ill_1_tbilisi.png" x="8" y="32" width="158" height="200" opacity="0.95"/>
+
+  <!-- 2: Sighnaghi wine+fortress — центр зоны 1 -->
+  <image href="грузия/ill_2_sighnaghi.png" x="246" y="52" width="205" height="168" opacity="0.95"/>
+
+  <!-- 3: Kazbegi mountains+church — правая часть зоны 1, большой -->
+  <image href="грузия/ill_3_kazbegi.png" x="518" y="0" width="338" height="255" opacity="0.95"/>
+
+  <!-- 4: Katskhi rock — центр на точке 4 (cy=330), не заходит на 6 -->
+  <image href="грузия/ill_4_katskhi.png" x="10" y="270" width="188" height="172" opacity="0.95"/>
+
+  <!-- 5: Martvili boat+canyon — сдвинуто правее, не перекрывает пунктир -->
+  <image href="грузия/ill_5_martvili.png" x="528" y="265" width="290" height="208" opacity="0.95"/>
+
+  <!-- 6: Gelati arch+chandelier — центр зоны 2 -->
+  <image href="грузия/ill_6_gelati.png" x="148" y="352" width="232" height="122" opacity="0.95"/>
+
+  <!-- 7: Borjomi gazebo — правый край зоны 3 -->
+  <image href="грузия/ill_7_borjomi.png" x="665" y="478" width="192" height="198" opacity="0.95"/>
+
+  <!-- 8: Airplane finish — крупнее -->
+  <image href="грузия/ill_8_finish.png" x="155" y="538" width="248" height="155" opacity="0.95"/>
+
+  <!-- STOP PINS -->
+
+  <!-- D1 Tbilisi -->
+  <g id="d1" style="cursor:pointer">
+    <circle cx="120" cy="175" r="26" fill="#F2B8C6" opacity=".2"/>
+    <circle cx="120" cy="175" r="16" fill="#F2B8C6" stroke="#fff" stroke-width="3"/>
+    <text x="120" y="180" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="#72243E">1</text>
+    <rect x="70" y="195" width="100" height="22" rx="11" fill="#fff" opacity=".85"/>
+    <text x="120" y="210" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="700" fill="#9E4A30">Тбилиси · Мцхета</text>
+  </g>
+
+  <!-- D2 Sighnaghi -->
+  <g id="d2" style="cursor:pointer">
+    <circle cx="340" cy="185" r="26" fill="#F2B8C6" opacity=".2"/>
+    <circle cx="340" cy="185" r="16" fill="#F2B8C6" stroke="#fff" stroke-width="3"/>
+    <text x="340" y="190" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="#72243E">2</text>
+    <rect x="282" y="205" width="116" height="22" rx="11" fill="#fff" opacity=".85"/>
+    <text x="340" y="220" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="700" fill="#9E4A30">Сигнахи · Кахетия</text>
+  </g>
+
+  <!-- D3 Kazbek -->
+  <g id="d3" style="cursor:pointer">
+    <circle cx="650" cy="105" r="26" fill="#F2B8C6" opacity=".2"/>
+    <circle cx="650" cy="105" r="16" fill="#F2B8C6" stroke="#fff" stroke-width="3"/>
+    <text x="650" y="110" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="#72243E">3</text>
+    <rect x="590" y="125" width="120" height="22" rx="11" fill="#fff" opacity=".85"/>
+    <text x="650" y="140" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="700" fill="#9E4A30">Казбеги · Гергети</text>
+  </g>
+
+  <!-- D4 Uplistsikhe + Katskhi -->
+  <g id="d4" style="cursor:pointer">
+    <circle cx="200" cy="330" r="26" fill="#B8D8C8" opacity=".25"/>
+    <circle cx="200" cy="330" r="16" fill="#B8D8C8" stroke="#fff" stroke-width="3"/>
+    <text x="200" y="335" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="#085041">4</text>
+    <rect x="130" y="350" width="140" height="22" rx="11" fill="#fff" opacity=".85"/>
+    <text x="200" y="365" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="700" fill="#085041">Уплисцихе · Кацхи</text>
+  </g>
+
+  <!-- D5 Martvili + Okace + Prometheus -->
+  <g id="d5" style="cursor:pointer">
+    <circle cx="500" cy="355" r="26" fill="#B8D8C8" opacity=".25"/>
+    <circle cx="500" cy="355" r="16" fill="#B8D8C8" stroke="#fff" stroke-width="3"/>
+    <text x="500" y="360" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="#085041">5</text>
+    <rect x="430" y="375" width="140" height="22" rx="11" fill="#fff" opacity=".85"/>
+    <text x="500" y="390" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="700" fill="#085041">Мартвили · Прометей</text>
+  </g>
+
+  <!-- D6 Tskaltubo / Gelati -->
+  <g id="d6" style="cursor:pointer">
+    <circle cx="130" cy="425" r="26" fill="#B8D8C8" opacity=".25"/>
+    <circle cx="130" cy="425" r="16" fill="#B8D8C8" stroke="#fff" stroke-width="3"/>
+    <text x="130" y="430" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="#085041">6</text>
+    <rect x="62" y="445" width="136" height="22" rx="11" fill="#fff" opacity=".85"/>
+    <text x="130" y="460" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="700" fill="#085041">Гелати · Цхалтубо</text>
+  </g>
+
+  <!-- D7 Vardzia / Borjomi -->
+  <g id="d7" style="cursor:pointer">
+    <circle cx="680" cy="545" r="26" fill="#D5C8E8" opacity=".3"/>
+    <circle cx="680" cy="545" r="16" fill="#D5C8E8" stroke="#fff" stroke-width="3"/>
+    <text x="680" y="550" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="#3C3489">7</text>
+    <rect x="614" y="565" width="132" height="22" rx="11" fill="#fff" opacity=".85"/>
+    <text x="680" y="580" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="700" fill="#3C3489">Боржоми · Вардзия</text>
+  </g>
+
+  <!-- D8 Finish Fabrika -->
+  <g id="d8" style="cursor:pointer">
+    <circle cx="380" cy="628" r="26" fill="#D5C8E8" opacity=".3"/>
+    <circle cx="380" cy="628" r="16" fill="#F2B8C6" stroke="#fff" stroke-width="3"/>
+    <text x="380" y="633" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" font-weight="700" fill="#72243E">8</text>
+    <rect x="306" y="648" width="148" height="22" rx="11" fill="#fff" opacity=".9"/>
+    <text x="380" y="663" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" font-weight="700" fill="#9E4A30">Финал 🌸</text>
+  </g>
+
+  <!-- CAR -->
+  <g id="theCar" transform="translate(110,158)">
+    <rect x="-18" y="-9" width="36" height="18" rx="6" fill="#F9D4C0" stroke="#E8A080" stroke-width="1.5"/>
+    <rect x="-12" y="-17" width="24" height="12" rx="3" fill="#FBEAF0" stroke="#E8A080" stroke-width="1"/>
+    <circle cx="-10" cy="9" r="5" fill="#9E7B6A"/>
+    <circle cx="10" cy="9" r="5" fill="#9E7B6A"/>
+    <circle cx="-10" cy="9" r="2.5" fill="#FDF6EF"/>
+    <circle cx="10" cy="9" r="2.5" fill="#FDF6EF"/>
+    <circle cx="16" cy="-2" r="2.5" fill="#FAC775" opacity=".9"/>
+  </g>
+</svg>
+    </div>
+
+    <!-- POPUPS -->
+    <div class="stop-popup" id="p1" style="top:100px;left:10px;">
+      <img src="грузия/Джвари.jpg" alt="Тбилиси">
+      <span class="sp-badge">День 0 · 20 июля</span>
+      <div class="sp-name">Тбилиси и Мцхета</div>
+      <div class="sp-fact">Монастырь Джвари построен в VI веке на месте, где Нино водрузила деревянный крест. Лермонтов именно здесь «поставил» своего Мцыри — вид с горы буквально рифмуется с поэмой.</div>
+    </div>
+
+    <div class="stop-popup" id="p2" style="top:120px;right:10px;">
+      <img src="грузия/Мцхета.jpg" alt="Кахетия">
+      <span class="sp-badge">День 1 · 21 июля</span>
+      <div class="sp-name">Кахетия — вино и Сигнахи</div>
+      <div class="sp-fact">Грузия — родина виноделия: следам вина здесь 8 000 лет. Метод «квеври» — в списке ЮНЕСКО. Сигнахи — единственный в стране круглосуточный ЗАГС.</div>
+    </div>
+
+    <div class="stop-popup" id="p3" style="top:10px;right:10px;">
+      <img src="грузия/SAMEBA.jpg" alt="Казбеги">
+      <span class="sp-badge">День 2 · 22 июля</span>
+      <div class="sp-name">Казбеги и Гергетская церковь</div>
+      <div class="sp-fact">Церковь на 2 170 м — стоит выше облаков. В советское время здесь хранили иконы, вывезенные из Тбилиси.</div>
+    </div>
+
+    <div class="stop-popup" id="p4" style="right:10px;">
+      <img src="грузия/explore-katskhi-holidays.jpg" alt="Уплисцихе">
+      <span class="sp-badge" style="background:rgba(184,216,200,.4);color:#085041;">День 3 · 23 июля</span>
+      <div class="sp-name">Уплисцихе и Столп Кацхи</div>
+      <div class="sp-fact">Пещерный город Уплисцихе заселён с I тыс. до н.э. — в расцвете 20 000 жителей. Монастырь на Столпе Кацхи заново открыли учёные только в 1940-х — до этого считался недоступным.</div>
+    </div>
+
+    <div class="stop-popup" id="p5" style="left:10px;">
+      <img src="грузия/Мартвили.jpeg" alt="Каньоны">
+      <span class="sp-badge" style="background:rgba(184,216,200,.4);color:#085041;">День 4 · 24 июля</span>
+      <div class="sp-name">Два каньона и пещера Прометея</div>
+      <div class="sp-fact">Пещера Прометея открыта в 1984 году — внутри подземная река и озеро. Самую красивую узкую часть каньона Мартвили видно только с лодки.</div>
+    </div>
+
+    <div class="stop-popup" id="p6" style="left:10px;">
+      <img src="грузия/гелати.jpg" alt="Гелати">
+      <span class="sp-badge" style="background:rgba(184,216,200,.4);color:#085041;">День 5 · 25 июля</span>
+      <div class="sp-name">Цхалтубо — эстетика заброшек</div>
+      <div class="sp-fact">Главный санаторий СССР, сюда приезжал Сталин. После распада огромные ампирные здания опустели — теперь главный urbex Европы.</div>
+    </div>
+
+    <div class="stop-popup" id="p7" style="right:10px;">
+      <img src="грузия/vardzia.jpg" alt="Вардзия">
+      <span class="sp-badge" style="background:rgba(213,200,232,.5);color:#3C3489;">День 6 · 26 июля</span>
+      <div class="sp-name">Вардзия — пещерный город</div>
+      <div class="sp-fact">13 уровней в скале, XII век. Фрески с портретом царицы Тамары живы несмотря на 800 лет.</div>
+    </div>
+
+    <div class="stop-popup" id="p8" style="left:50%;transform:translateX(-50%);">
+      <img src="грузия/rike-park-v-tbilisi-e1618519402961.jpg" alt="Финал">
+      <span class="sp-badge" style="background:rgba(213,200,232,.5);color:#3C3489;">День 7 · 27 июля</span>
+      <div class="sp-name">Fabrika — прощальный ужин</div>
+      <div class="sp-fact">Бывший швейный завод — главный лофт-хаб Тбилиси. Творческое комьюнити, уличная еда, финал «Проекта Грузия».</div>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:12px;color:var(--dusty);padding:20px 0 60px;">👆 нажимай на пронумерованные точки маршрута</p>
+</section>
+
+<!-- BLOCK 1 -->
+<section id="days" class="section section-peach">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="block-label">Глава 1</div>
+    <h2 class="block-title">Тбилиси как база</h2>
+    <p class="block-subtitle">4 ночи · 20–23 июля</p>
+
+    
+    <div class="day-card" data-animate>
+      <div class="day-photo" style="background:linear-gradient(135deg,#F9D4C0,#F2B8C6);display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;padding:40px;">
+          <div style="font-size:64px;">✈️</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:var(--brown);margin-top:16px;">Добро пожаловать<br>в Грузию</div>
+        </div>
+        <div class="day-badge">День 0 · 20 июля</div>
+      </div>
+      <div class="day-content">
+        <div class="day-slogan">Перелёт и первый вечер</div>
+        <h3 class="day-title">День 0 · Прилёт в Тбилиси</h3>
+        <div class="timeline">
+          <div class="titem"><span class="ttime">13:25</span><span class="ttext">Вылет из Санкт-Петербурга</span></div>
+          <div class="titem"><span class="ttime">18:30</span><span class="ttext">Прилёт в Тбилиси — заселение в отель, лёгкий отдых</span></div>
+          <div class="titem"><span class="ttime">20:00</span><span class="ttext">Ужин рядом с отелем — первые хинкали и вино</span></div>
+          <div class="titem"><span class="ttime">Вечер</span><span class="ttext">Первая прогулка по вечернему Тбилиси, ранний отбой</span></div>
+        </div>
+        <div class="fact-box">
+          <div class="fact-label">💡 Совет</div>
+          <div class="fact-text">Обменяйте рубли на лари в аэропорту или в центре — курс в банкоматах часто лучше. Первый вечер лёгкий: завтра насыщенный день.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card" data-animate>
+      <div class="day-photo carousel" id="car-1">
+        <div class="carousel-track" id="track-1">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/rike-park-v-tbilisi-e1618519402961.jpg" alt="Тбилиси" style="">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/Мцхета.jpg" alt="Тбилиси" style="">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/chronicle-of-georgia.jpg" alt="Тбилиси" style="">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/Джвари.jpg" alt="Тбилиси" style="">
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="moveCarousel(1,-1)">‹</button>
+        <button class="carousel-btn carousel-next" onclick="moveCarousel(1,1)">›</button>
+        <div class="carousel-dots" id="dots-1">
+          <div class="carousel-dot active" onclick="goToSlide(1,0)"></div>
+          <div class="carousel-dot" onclick="goToSlide(1,1)"></div>
+          <div class="carousel-dot" onclick="goToSlide(1,2)"></div>
+          <div class="carousel-dot" onclick="goToSlide(1,3)"></div>
+        </div>
+        <div class="day-badge" style="color:var(--rose);">День 1 · 21 июля</div>
+      </div>
+      <div class="day-content">
+        <div class="day-slogan">Вкатываемся в ритм</div>
+        <h3 class="day-title">Тбилиси и Мцхета</h3>
+        <div class="timeline">
+          <div class="titem"><span class="ttime">07:00</span><span class="ttext">Завтрак в районе Вера — скрэмбл, спешлти-кофе, скандинавский интерьер</span></div>
+          <div class="titem"><span class="ttime">08:00</span><span class="ttext">Фотопрогулка по пустому Тбилиси — парадные Сололаки и балконы пока город спит</span></div>
+          <div class="titem"><span class="ttime">12:00</span><span class="ttext">Обед в районе винзавода №1 — современный лофт</span></div>
+          <div class="titem"><span class="ttime">13:30</span><span class="ttext">Монастырь Джвари — церковь VI века на вершине горы</span></div>
+          <div class="titem"><span class="ttime">15:00</span><span class="ttext">Прогулка по узким улочкам Мцхеты — древней столицы Грузии</span></div>
+          <div class="titem"><span class="ttime">18:00</span><span class="ttext">Возвращение в Тбилиси, свободный вечер</span></div>
+        </div>
+        <div class="fact-box">
+          <div class="fact-label">💡 Интересный факт</div>
+          <div class="fact-text">Монастырь Джвари построен в VI веке на месте, где Нино водрузила деревянный крест. Лермонтов именно здесь «поставил» своего Мцыри — вид с горы буквально рифмуется с поэмой.</div>
+        </div>
+        <span class="price-tag">Вход: бесплатно</span>
+      </div>
+    </div>
+
+    <div class="day-card flip" data-animate>
+      <div class="day-photo carousel" id="car-2">
+        <div class="carousel-track" id="track-2">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/сигнахи.jpg" alt="Кахетия" style="">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/2025-05-20+18.17.34.webp" alt="Кахетия" style="">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/квеври.webp" alt="Кахетия" style="">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/сигнахи1.jpg" alt="Кахетия" style="">
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="moveCarousel(2,-1)">‹</button>
+        <button class="carousel-btn carousel-next" onclick="moveCarousel(2,1)">›</button>
+        <div class="carousel-dots" id="dots-2">
+          <div class="carousel-dot active" onclick="goToSlide(2,0)"></div>
+          <div class="carousel-dot" onclick="goToSlide(2,1)"></div>
+          <div class="carousel-dot" onclick="goToSlide(2,2)"></div>
+          <div class="carousel-dot" onclick="goToSlide(2,3)"></div>
+        </div>
+        <div class="day-badge">День 2 · 22 июля</div>
+      </div>
+      <div class="day-content">
+        <div class="day-slogan">Вино и тихая роскошь</div>
+        <h3 class="day-title">Кахетия — вино и Сигнахи</h3>
+        <div class="timeline">
+          <div class="titem"><span class="ttime">07:00</span><span class="ttext">Ранний выезд на восток</span></div>
+          <div class="titem"><span class="ttime">08:00</span><span class="ttext">Дорога в Сигнахи — пейзажи Алазанской долины, чистая геометрия</span></div>
+          <div class="titem"><span class="ttime">10:00</span><span class="ttext">Прогулка по крепостной стене — итальянский вайб в грузинском исполнении</span></div>
+          <div class="titem"><span class="ttime">12:00</span><span class="ttext">Обед и дегустация на современной винодельне с панорамным остеклением</span></div>
+          <div class="titem"><span class="ttime">15:00</span><span class="ttext">Возвращение в Тбилиси до сумерек</span></div>
+        </div>
+        <div class="fact-box">
+          <div class="fact-label">💡 Интересный факт</div>
+          <div class="fact-text">Грузия — родина виноделия: следам вина здесь 8 000 лет. Метод «квеври» — в списке ЮНЕСКО. Сигнахи — единственный в стране круглосуточный ЗАГС.</div>
+        </div>
+        <span class="price-tag">Дегустация: 40–60 лари (~1 900 ₽)</span>
+      </div>
+    </div>
+
+    <div class="day-card" data-animate>
+      <div class="day-photo carousel" id="car-3">
+        <div class="carousel-track" id="track-3">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/XXXL.webp" alt="Казбеги" style="">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/tranquil.jpg" alt="Казбеги" style="">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/Ананури.jpg" alt="Казбеги" style="">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/SAMEBA.jpg" alt="Казбеги" style="">
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="moveCarousel(3,-1)">‹</button>
+        <button class="carousel-btn carousel-next" onclick="moveCarousel(3,1)">›</button>
+        <div class="carousel-dots" id="dots-3">
+          <div class="carousel-dot active" onclick="goToSlide(3,0)"></div>
+          <div class="carousel-dot" onclick="goToSlide(3,1)"></div>
+          <div class="carousel-dot" onclick="goToSlide(3,2)"></div>
+          <div class="carousel-dot" onclick="goToSlide(3,3)"></div>
+        </div>
+        <div class="day-badge">День 3 · 23 июля</div>
+      </div>
+      <div class="day-content">
+        <div class="day-slogan">Максимальная концентрация эстетики</div>
+        <h3 class="day-title">Казбеги и Военно-Грузинская дорога</h3>
+        <div class="timeline">
+          <div class="titem"><span class="ttime">07:00</span><span class="ttext">Выезд на Военно-Грузинскую дорогу</span></div>
+          <div class="titem"><span class="ttime">08:00</span><span class="ttext">Жинвальское водохранилище (бирюзовая вода) и крепость Ананури</span></div>
+          <div class="titem"><span class="ttime">09:30</span><span class="ttext">Монумент Дружбы народов — советский модернизм и невероятные виды</span></div>
+          <div class="titem"><span class="ttime">12:30</span><span class="ttext">Обед на террасе отеля Rooms с видом на гору Казбек</span></div>
+          <div class="titem"><span class="ttime">14:00</span><span class="ttext">Подъём к Гергетской церкви на 2 170 м</span></div>
+          <div class="titem"><span class="ttime">15:30</span><span class="ttext">Обратный путь — приезд в Тбилиси к закату</span></div>
+        </div>
+        <div class="fact-box">
+          <div class="fact-label">💡 Интересный факт</div>
+          <div class="fact-text">Гергетская церковь стоит выше облаков. В советское время здесь хранили иконы, вывезенные из Тбилиси. Монумент Дружбы народов 1983 года — его снос периодически обсуждают.</div>
+        </div>
+        <span class="price-tag">Джип к церкви: 15–20 лари · Всё остальное бесплатно</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 2 -->
+<section class="section section-mint">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="block-label">Глава 2</div>
+    <h2 class="block-title">Запад: каньоны и пещеры</h2>
+    <p class="block-subtitle">2 ночи в Кутаиси · 1 в Боржоми · 23–26 июля</p>
+
+    <div class="day-card flip" data-animate>
+      <div class="day-photo carousel" id="car-4">
+        <div class="carousel-track" id="track-4">
+          <img src="грузия/katskhi-aerial.png" alt="Уплисцихе" style="min-width:100%;">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/уплисцихе.jpg" alt="Уплисцихе" style="">
+          <img src="грузия/georgian-church.png" alt="Уплисцихе" style="min-width:100%;">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/shutterstock_1729067866.jpeg" alt="Уплисцихе" style="">
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="moveCarousel(4,-1)">‹</button>
+        <button class="carousel-btn carousel-next" onclick="moveCarousel(4,1)">›</button>
+        <div class="carousel-dots" id="dots-4">
+          <div class="carousel-dot active" onclick="goToSlide(4,0)"></div>
+          <div class="carousel-dot" onclick="goToSlide(4,1)"></div>
+          <div class="carousel-dot" onclick="goToSlide(4,2)"></div>
+          <div class="carousel-dot" onclick="goToSlide(4,3)"></div>
+        </div>
+        <div class="day-badge" style="color:#085041;">День 4 · 24 июля</div>
+      </div>
+      <div class="day-content">
+        <div class="day-slogan">Камни и дорога</div>
+        <h3 class="day-title">Уплисцихе и Столп Кацхи</h3>
+        <div class="timeline">
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">07:00</span><span class="ttext">Завтрак, чек-аут из тбилисского отеля</span></div>
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">09:30</span><span class="ttext">Уплисцихе — пещерный город с лунными пейзажами, лучший свет утром</span></div>
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">11:00</span><span class="ttext">Дорога к Столпу Кацхи — одинокий монастырь на 40-метровой скале</span></div>
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">13:30</span><span class="ttext">Обед + мастер-класс по грузинской кухне поблизости (45€)</span></div>
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">15:00</span><span class="ttext">Приезд в Кутаиси, заселение, Храм Баграта в закатном свете</span></div>
+        </div>
+        <div class="fact-box" style="background:linear-gradient(135deg,rgba(184,216,200,.2),rgba(184,216,200,.1));border-left-color:var(--mint);">
+          <div class="fact-label" style="color:#1D9E75;">💡 Интересный факт</div>
+          <div class="fact-text">Пещерный город Уплисцихе заселён с I тыс. до н.э. — в расцвете 20 000 жителей. Монастырь на Столпе Кацхи заново открыли учёные только в 1940-х — до этого считался недоступным.</div>
+        </div>
+        <span class="price-tag">Уплисцихе: 15 лари · Столп: бесплатно</span>
+      </div>
+    </div>
+
+    <div class="day-card" data-animate>
+      <div class="day-photo carousel" id="car-5">
+        <div class="carousel-track" id="track-5">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/Мартвили.jpeg" alt="" style="height:100%;object-fit:cover;">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/Пещера1.jpg" alt="" style="height:100%;object-fit:cover;">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/prometheus-cave.jpg" alt="" style="height:100%;object-fit:cover;">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/Мартвили.webp" alt="" style="height:100%;object-fit:cover;">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/img_001.png" alt="" style="height:100%;object-fit:cover;">
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="moveCarousel(5,-1)">‹</button>
+        <button class="carousel-btn carousel-next" onclick="moveCarousel(5,1)">›</button>
+        <div class="carousel-dots" id="dots-5">
+          <div class="carousel-dot active" onclick="goToSlide(5,0)"></div>
+          <div class="carousel-dot" onclick="goToSlide(5,1)"></div>
+          <div class="carousel-dot" onclick="goToSlide(5,2)"></div>
+          <div class="carousel-dot" onclick="goToSlide(5,3)"></div>
+          <div class="carousel-dot" onclick="goToSlide(5,4)"></div>
+        </div>
+          <div class="carousel-dot" onclick="goToSlide(5,1)"></div>
+          <div class="carousel-dot" onclick="goToSlide(5,2)"></div>
+          <div class="carousel-dot" onclick="goToSlide(5,3)"></div>
+        </div>
+        <div class="day-badge" style="color:#085041;">День 5 · 25 июля</div>
+      
+      <div class="day-content">
+        <div class="day-slogan">Природный спринт</div>
+        <h3 class="day-title">Два каньона и пещера Прометея</h3>
+        <div class="timeline">
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">09:15</span><span class="ttext">Каньон Окаце — подвесные мосты над пропастью</span></div>
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">12:00</span><span class="ttext">Лодочки в бирюзовом каньоне Мартвили — обязательно!</span></div>
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">13:30</span><span class="ttext">Обед поблизости</span></div>
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">15:45</span><span class="ttext">Пещера Прометея — подземная архитектура + лодка по реке</span></div>
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">17:15</span><span class="ttext">Возвращение в Кутаиси, свободный вечер</span></div>
+        </div>
+        <div class="fact-box" style="background:linear-gradient(135deg,rgba(184,216,200,.2),rgba(184,216,200,.1));border-left-color:var(--mint);">
+          <div class="fact-label" style="color:#1D9E75;">💡 Интересный факт</div>
+          <div class="fact-text">Пещера Прометея открыта в 1984 году — внутри подземная река и озеро. Самую красивую узкую часть каньона Мартвили видно только с лодки. Лайфхак: комбо-билет Мартвили+Окаце на кассе — ~80 лари.</div>
+        </div>
+        <span class="price-tag">Прометей: 40+30 л · Мартвили: 40+20 л · Окаце: 30 л</span>
+      </div>
+    </div>
+      
+    </div>
+
+    <div class="day-card flip" data-animate>
+      <div class="day-photo carousel" id="car-6">
+        <div class="carousel-track" id="track-6">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/гелати.jpg" alt="" style="height:100%;object-fit:cover;">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/termalnie-istochniki-nokalakevi.jpg" alt="" style="height:100%;object-fit:cover;">
+          <img src="грузия/tskaltubo.png" alt="" style="min-width:100%;height:100%;object-fit:cover;">
+          <img src="грузия/motsameta.png" alt="" style="min-width:100%;height:100%;object-fit:cover;">
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="moveCarousel(6,-1)">‹</button>
+        <button class="carousel-btn carousel-next" onclick="moveCarousel(6,1)">›</button>
+        <div class="carousel-dots" id="dots-6">
+          <div class="carousel-dot active" onclick="goToSlide(6,0)"></div>
+          <div class="carousel-dot" onclick="goToSlide(6,1)"></div>
+          <div class="carousel-dot" onclick="goToSlide(6,2)"></div>
+          <div class="carousel-dot" onclick="goToSlide(6,3)"></div>
+        </div>
+        <div class="day-badge" style="color:#085041;">День 6 · 26 июля</div>
+      </div>
+      <div class="day-content">
+        <div class="day-slogan">Эстетика заброшек и путь на юг</div>
+        <h3 class="day-title">Цхалтубо и дорога к Боржоми</h3>
+        <div class="timeline">
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">08:00</span><span class="ttext">Монастыри Гелати и Моцамета — утренняя тишина и древняя кладка</span></div>
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">10:00</span><span class="ttext">Цхалтубо — заброшенные санатории в стиле ампир (самая фактурная фотосессия трипа)</span></div>
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">14:00</span><span class="ttext">Горячие источники Нокалакеви — серные ванны прямо у реки (по желанию)</span></div>
+          <div class="titem"><span class="ttime" style="color:#1D9E75;">15:30</span><span class="ttext">Переезд в отель у Боржоми — паркуемся к ужину</span></div>
+        </div>
+        <div class="fact-box" style="background:linear-gradient(135deg,rgba(184,216,200,.2),rgba(184,216,200,.1));border-left-color:var(--mint);">
+          <div class="fact-label" style="color:#1D9E75;">💡 Интересный факт</div>
+          <div class="fact-text">В 1940–50-х Цхалтубо — главный санаторий СССР, сюда приезжал Сталин. После распада огромные ампирные здания опустели за несколько лет и стали одним из главных urbex-объектов Европы. Гелати — монастырь XII века, объект ЮНЕСКО.</div>
+        </div>
+        <span class="price-tag">Гелати, Моцамета, Цхалтубо — бесплатно</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 3 -->
+<section class="section section-lav">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="block-label">Глава 3</div>
+    <h2 class="block-title">Юг и финал</h2>
+    <p class="block-subtitle">1 ночь возле Вардзии · 1 ночь в Тбилиси · 27–29 июля</p>
+
+    <div class="day-card" data-animate>
+      <div class="day-photo carousel" id="car-7">
+        <div class="carousel-track" id="track-7">
+          <img src="грузия/vardzia1.jpg" alt="" style="min-width:100%;height:100%;object-fit:cover;">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/1592243142129441754.jpg" alt="" style="height:100%;object-fit:cover;">
+          <img style="min-width:100%;height:100%;object-fit:cover;" src="грузия/borzhomi-gorod.jpg" alt="" style="height:100%;object-fit:cover;">
+          <img src="грузия/vardzia2.jpg" alt="" style="min-width:100%;height:100%;object-fit:cover;">
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="moveCarousel(7,-1)">‹</button>
+        <button class="carousel-btn carousel-next" onclick="moveCarousel(7,1)">›</button>
+        <div class="carousel-dots" id="dots-7">
+          <div class="carousel-dot active" onclick="goToSlide(7,0)"></div>
+          <div class="carousel-dot" onclick="goToSlide(7,1)"></div>
+          <div class="carousel-dot" onclick="goToSlide(7,2)"></div>
+          <div class="carousel-dot" onclick="goToSlide(7,3)"></div>
+        </div>
+        <div class="day-badge" style="color:#3C3489;">День 7 · 27 июля</div>
+      </div>
+      <div class="day-content">
+        <div class="day-slogan">Финал с размахом</div>
+        <h3 class="day-title">Вардзия — пещерный город и возвращение</h3>
+        <div class="timeline">
+          <div class="titem"><span class="ttime" style="color:#534AB7;">08:00</span><span class="ttext">Завтрак в отеле</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">09:00</span><span class="ttext">Утренняя прогулка по Центральному парку Боржоми — пьём воду из источника и дышим хвоей</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">11:00</span><span class="ttext">Выезд — переезд в Ахалцихе (~1,5 часа)</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">12:30</span><span class="ttext">Крепость Рабат — верхняя часть, сады и мавританская архитектура</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">14:00</span><span class="ttext">Переезд к крепости Хертвиси</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">15:00</span><span class="ttext">Фотостоп у крепости Хертвиси — снаружи она выглядит максимально масштабно</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">15:30</span><span class="ttext">Переезд в Вардзию</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">16:00</span><span class="ttext">Вардзия — закладываем 2 часа на все 13 уровней</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">18:00</span><span class="ttext">Поздний обед в кафе у реки Кура — речная форель</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">19:30</span><span class="ttext">Заселение в отель возле Вардзии</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">20:30</span><span class="ttext">Ужин на вилле, отдых после насыщенного дня</span></div>
+        </div>
+        <div class="fact-box" style="background:linear-gradient(135deg,rgba(213,200,232,.25),rgba(213,200,232,.1));border-left-color:var(--lav);">
+          <div class="fact-label" style="color:#534AB7;">💡 Интересный факт</div>
+          <div class="fact-text">Вардзия — 13 уровней в скале, XII век. Внутри фрески с портретом царицы Тамары — живые несмотря на 800 лет. После землетрясения 1283 года фасад обрушился и город открылся взгляду.</div>
+        </div>
+        <span class="price-tag" style="background:rgba(213,200,232,.4);color:#3C3489;">Боржоми: 5 л · Хертвиси: 10 л · Вардзия: 15 л + микробус 2 л</span>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="day-card" data-animate>
+      <div class="day-photo carousel" id="car-8b">
+        <div class="carousel-track" id="track-8b">
+          <img src="грузия/tbilisi-baths.jpg" alt="" style="min-width:100%;height:100%;object-fit:cover;">
+          <img src="грузия/tbilisi-dog.jpg" alt="" style="min-width:100%;height:100%;object-fit:cover;">
+          <img src="грузия/souvenirs.webp" alt="" style="min-width:100%;height:100%;object-fit:cover;">
+          <img src="грузия/tbilisi-restaurant.webp" alt="" style="min-width:100%;height:100%;object-fit:cover;">
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="moveCarousel('8b',-1)">&#8592;</button>
+        <button class="carousel-btn carousel-next" onclick="moveCarousel('8b',1)">&#8594;</button>
+        <div class="carousel-dots" id="dots-8b">
+          <div class="carousel-dot active" onclick="goToSlide('8b',0)"></div>
+          <div class="carousel-dot" onclick="goToSlide('8b',1)"></div>
+          <div class="carousel-dot" onclick="goToSlide('8b',2)"></div>
+          <div class="carousel-dot" onclick="goToSlide('8b',3)"></div>
+        </div>
+        <div class="day-badge" style="color:#3C3489;">День 8 · 28 июля</div>
+      </div>
+      <div class="day-content">
+        <div class="day-slogan">Тбилиси — без спешки</div>
+        <h3 class="day-title">Свободный день в Тбилиси</h3>
+        <div class="timeline">
+          <div class="titem"><span class="ttime" style="color:#534AB7;">08:00</span><span class="ttext">Завтрак в горном отеле, сборы</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">09:00</span><span class="ttext">Переезд из горного отеля у Вардзии в Тбилиси (~5 часов)</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">14:00</span><span class="ttext">Прибытие в Тбилиси, заселение в отель</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">15:00</span><span class="ttext">Обед в старом городе</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">16:00</span><span class="ttext">Дезертирский рынок — специи, аджика, уцхо-сунели в 2–3 раза дешевле туристических магазинов</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">17:30</span><span class="ttext">Шопинг по лавочкам — авторская керамика, грузинское вино, украшения, сувениры домой</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">19:00</span><span class="ttext">Прогулка по Сололаки, кофе на крышах, последние фотографии</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">20:00</span><span class="ttext">Серные бани в Абанотубани — тёплая вода и расслабление перед вылетом</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">21:30</span><span class="ttext">Лёгкий прощальный ужин, ранний отбой — завтра выезд в 07:30</span></div>
+        </div>
+        <div class="fact-box" style="background:linear-gradient(135deg,rgba(213,200,232,.25),rgba(213,200,232,.1));border-left-color:var(--lav);">
+          <div class="fact-label" style="color:#534AB7;">💡 Совет</div>
+          <div class="fact-text">Серные бани лучше бронировать заранее — от 200 лари за час. Вылет в 10:25, значит выезд из отеля в 07:30 — ложитесь спать пораньше.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card flip" data-animate>
+      <div class="day-photo carousel" id="car-8">
+        <div class="carousel-track" id="track-8">
+          <img src="грузия/airport.jpg" alt="" style="min-width:100%;height:100%;object-fit:cover;">
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="moveCarousel(8,-1)">&#8592;</button>
+        <button class="carousel-btn carousel-next" onclick="moveCarousel(8,1)">&#8594;</button>
+        <div class="carousel-dots" id="dots-8">
+          <div class="carousel-dot active" onclick="goToSlide(8,0)"></div>
+        </div>
+        <div class="day-badge" style="color:#3C3489;">День 9 · 29 июля</div>
+      </div>
+      <div class="day-content">
+        <div class="day-slogan">До свидания, Грузия</div>
+        <h3 class="day-title">Вылет домой</h3>
+        <div class="timeline">
+          <div class="titem"><span class="ttime" style="color:#534AB7;">06:30</span><span class="ttext">Завтрак в отеле</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">07:30</span><span class="ttext">Спокойный выезд в аэропорт Тбилиси</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">10:25</span><span class="ttext">Вылет Тбилиси → Санкт-Петербург, прямой рейс</span></div>
+          <div class="titem"><span class="ttime" style="color:#534AB7;">13:40</span><span class="ttext">Прилёт в Санкт-Петербург ✈️</span></div>
+        </div>
+        <div class="fact-box" style="background:linear-gradient(135deg,rgba(213,200,232,.25),rgba(213,200,232,.1));border-left-color:var(--lav);">
+          <div class="fact-label" style="color:#534AB7;">💡 Что привезти</div>
+          <div class="fact-text">Специи на Дезертирском рынке — в 2–3 раза дешевле туристических магазинов. Авторская керамика с традиционными узорами. Натуральное вино из квеври — в любом супермаркете лучший выбор.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- BUDGET -->
+<section id="budget" class="section section-white">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="block-label">Финансы</div>
+    <h2 class="block-title">Считаем деньги</h2>
+    <p class="block-subtitle">Бюджет на 1 человека · всё включено</p>
+
+    <div class="budget-grid">
+      <div class="budget-card" data-animate>
+        <div class="budget-icon">✈️</div>
+        <div class="budget-name">Авиабилеты</div>
+        <div class="budget-amount">~53 000 ₽</div>
+        <div class="budget-note">Перелёт туда-обратно. Брать заранее — цена растёт</div>
+      </div>
+      <div class="budget-card" data-animate>
+        <div class="budget-icon">🏨</div>
+        <div class="budget-name">Проживание</div>
+        <div class="budget-amount">~15 000 ₽</div>
+        <div class="budget-note">7 ночей в отелях и гостевых домах. Тбилиси, Кутаиси, Боржоми</div>
+      </div>
+      <div class="budget-card" data-animate>
+        <div class="budget-icon">🚗</div>
+        <div class="budget-name">Транспорт</div>
+        <div class="budget-amount">~3 400 ₽</div>
+        <div class="budget-note">Аренда авто на всех (~17 000 ₽ на группу за 4 дня)</div>
+      </div>
+      <div class="budget-card" data-animate>
+        <div class="budget-icon">🍽️</div>
+        <div class="budget-name">Питание</div>
+        <div class="budget-amount">~25 000 ₽</div>
+        <div class="budget-note">Завтраки, обеды, ужины. В счёт добавляют 8–35% за обслуживание</div>
+      </div>
+      <div class="budget-card" data-animate>
+        <div class="budget-icon">🎟️</div>
+        <div class="budget-name">Экскурсии и активности</div>
+        <div class="budget-amount">~25 000 ₽</div>
+        <div class="budget-note">Пещеры, каньоны, дегустация, джипы, лодки — ~280–300 лари наличными</div>
+      </div>
+      <div class="budget-card" data-animate>
+        <div class="budget-icon">🛍️</div>
+        <div class="budget-name">Сувениры и личное</div>
+        <div class="budget-amount">~20 000 ₽</div>
+        <div class="budget-note">Специи, авторская керамика, вино домой, непредвиденные расходы</div>
+      </div>
+    </div>
+
+    <div class="budget-total" data-animate>
+      <div class="bt-label">Итого на 1 человека</div>
+      <div class="bt-amount">~141 000 ₽</div>
+    </div>
+
+    <div class="lifehack" data-animate>
+      💡 Наличные лари удобнее карты в большинстве локаций — обменяйте заранее.
+    </div>
+  </div>
+</section>
+
+<!-- EXCURSIONS -->
+<!-- HOTELS BLOCK -->
+<section id="hotels" class="section section-peach">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="block-label">Проживание</div>
+    <h2 class="block-title">Отели и апартаменты</h2>
+    <p class="block-subtitle" style="margin-bottom:36px;">Варианты по датам · цены на всю группу</p>
+
+    <style>
+      .hotel-period { margin-bottom:32px; }
+      .hotel-period-title { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:21px; color:var(--brown); margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid rgba(242,184,198,.4); }
+      .hotel-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; }
+      .hotel-card { background:#fff; border-radius:18px; border:.5px solid rgba(242,184,198,.5); padding:20px 22px; display:flex; flex-direction:column; gap:8px; transition:transform .2s; }
+      .hotel-card:hover { transform:translateY(-3px); }
+      .hotel-card-tag { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--rose); background:var(--peach); padding:3px 10px; border-radius:20px; display:inline-block; align-self:flex-start; }
+      .hotel-card-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:var(--brown); }
+      .hotel-card-price { font-size:22px; font-weight:700; color:var(--brown); }
+      .hotel-card-price span { font-size:12px; font-weight:400; color:var(--dusty); }
+      .hotel-card-link { margin-top:6px; display:inline-block; background:var(--rose); color:#fff; border-radius:30px; padding:8px 20px; font-size:11px; font-weight:600; letter-spacing:.06em; text-decoration:none; text-align:center; transition:opacity .2s; }
+      .hotel-card-link:hover { opacity:.85; }
+    </style>
+
+    <!-- 19–23 июля · Тбилиси -->
+    <div class="hotel-period">
+      <div class="hotel-period-title">🏙 19–23 июля · Тбилиси · 4 ночи</div>
+      <div class="hotel-cards">
+        <div class="hotel-card">
+          <span class="hotel-card-tag">Вариант 1</span>
+          <div class="hotel-card-name">Penthouse Apartment · 4 спальни</div>
+          <div class="hotel-card-price">30 500 ₽ <span>на группу</span></div>
+          <a class="hotel-card-link" href="https://www.booking.com/hotel/ge/picturesque-four-bedroom-four-bathrom-penthouse-apartment.ru.html?label=ru-tr-booking-desktop-2IxiyTyYkDONTo_xKiXFnwS652897959740%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-15349264036%3Alp1012764%3Ali%3Adec%3Adm&sid=1d6dc1b3dab767b92c6d076e172e5fc7&aid=2311236&ucfs=1&arphpl=1&checkin=2026-07-19&checkout=2026-07-23&group_adults=5&req_adults=5&no_rooms=1&group_children=0&req_children=0&all_sr_blocks=365783901_195038845_5_2_0&highlighted_blocks=365783901_195038845_5_2_0&matching_block_id=365783901_195038845_5_2_0&sr_pri_blocks=365783901_195038845_5_2_0&from_list=1#tab-main" target="_blank">Смотреть на Booking →</a>
+        </div>
+        <div class="hotel-card">
+          <span class="hotel-card-tag">Вариант 2</span>
+          <div class="hotel-card-name">Golden Pheasant Tbilisi</div>
+          <div class="hotel-card-price">26 700 ₽ <span>на группу</span></div>
+          <a class="hotel-card-link" href="https://www.booking.com/hotel/ge/golden-pheasant-tbilisi.html?ssne=%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%B8&ssne_untouched=%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%B8&highlighted_hotels=14359442&ss=%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%B8&dest_id=900047975&dest_type=city&hp_avform=1&origin=hp&do_availability_check=1&label=ru-tr-booking-desktop-2IxiyTyYkDONTo_xKiXFnwS652897959740%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-15349264036%3Alp1012764%3Ali%3Adec%3Adm&sid=1d6dc1b3dab767b92c6d076e172e5fc7&aid=2311236&lang=ru&sb=1&src_elem=sb&src=hotel&checkin=2026-07-19&checkout=2026-07-23&group_adults=5&no_rooms=1&group_children=0#_" target="_blank">Смотреть на Booking →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 23–25 июля · Кутаиси -->
+    <div class="hotel-period">
+      <div class="hotel-period-title">🏡 23–25 июля · Кутаиси · 2 ночи</div>
+      <div class="hotel-cards">
+        <div class="hotel-card">
+          <span class="hotel-card-tag" style="background:rgba(184,216,200,.4);color:#085041;">Вариант 1</span>
+          <div class="hotel-card-name">Varla Hotel</div>
+          <div class="hotel-card-price">26 100 ₽ <span>на группу</span></div>
+          <a class="hotel-card-link" href="https://www.booking.com/hotel/ge/varla.ru.html?label=ru-tr-booking-desktop-2IxiyTyYkDONTo_xKiXFnwS652897959740%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-15349264036%3Alp1012764%3Ali%3Adec%3Adm&sid=1d6dc1b3dab767b92c6d076e172e5fc7&aid=2311236&ucfs=1&checkin=2026-07-23&checkout=2026-07-25&dest_id=900049994&dest_type=city&group_adults=5&no_rooms=1&group_children=0&nflt=price%3DRUB-min-13500-1%3Breview_score%3D90&srpvid=4f704a17879402e9&srepoch=1777286075&matching_block_id=1214744303_418175027_0_0_0&atlas_src=sr_iw_title#_" target="_blank">Смотреть на Booking →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 25–26 июля · Боржоми -->
+    <div class="hotel-period">
+      <div class="hotel-period-title">🌲 25–26 июля · Боржоми · 1 ночь</div>
+      <div class="hotel-cards">
+        <div class="hotel-card">
+          <span class="hotel-card-tag" style="background:rgba(184,216,200,.4);color:#085041;">Вариант 1</span>
+          <div class="hotel-card-name">Forest Echo</div>
+          <div class="hotel-card-price">10 000 ₽ <span>на группу</span></div>
+          <a class="hotel-card-link" href="https://www.booking.com/hotel/ge/forest-echo.html?ssne=%D0%91%D0%BE%D1%80%D0%B6%D0%BE%D0%BC%D0%B8&ssne_untouched=%D0%91%D0%BE%D1%80%D0%B6%D0%BE%D0%BC%D0%B8&highlighted_hotels=14224730&ss=%D0%91%D0%BE%D1%80%D0%B6%D0%BE%D0%BC%D0%B8&dest_id=-2326360&dest_type=city&hp_avform=1&origin=hp&do_availability_check=1&label=ru-tr-booking-desktop-2IxiyTyYkDONTo_xKiXFnwS652897959740%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-15349264036%3Alp1012764%3Ali%3Adec%3Adm&sid=1d6dc1b3dab767b92c6d076e172e5fc7&aid=2311236&lang=ru&sb=1&src_elem=sb&src=hotel&checkin=2026-07-23&checkout=2026-07-24&group_adults=5&no_rooms=1&group_children=0" target="_blank">Смотреть на Booking →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 26–27 июля · По дороге -->
+    <div class="hotel-period">
+      <div class="hotel-period-title">🛣 26–27 июля · По дороге · 1 ночь</div>
+      <div class="hotel-cards">
+        <div class="hotel-card">
+          <span class="hotel-card-tag" style="background:rgba(213,200,232,.4);color:#3C3489;">Вариант 1</span>
+          <div class="hotel-card-name">Bee House</div>
+          <div class="hotel-card-price">5 500 ₽ <span>на группу</span></div>
+          <a class="hotel-card-link" href="https://www.booking.com/hotel/ge/bee-house.ru.html?label=ru-tr-booking-desktop-2IxiyTyYkDONTo_xKiXFnwS652897959740%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-15349264036%3Alp1012764%3Ali%3Adec%3Adm&sid=1d6dc1b3dab767b92c6d076e172e5fc7&aid=2311236&ucfs=1&arphpl=1&checkin=2026-07-23&checkout=2026-07-24&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&all_sr_blocks=719289607_375610469_2_1_0&highlighted_blocks=719289607_375610469_2_1_0&matching_block_id=719289607_375610469_2_1_0&sr_pri_blocks=719289607_375610469_2_1_0&from_list=1" target="_blank">Смотреть на Booking →</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 28–29 июля · Тбилиси -->
+    <div class="hotel-period">
+      <div class="hotel-period-title">🌙 28–29 июля · Тбилиси · 1 ночь (перед вылетом)</div>
+      <div class="hotel-cards">
+        <div class="hotel-card">
+          <span class="hotel-card-tag">Вариант 1</span>
+          <div class="hotel-card-name">Golden Pheasant Tbilisi</div>
+          <div class="hotel-card-price">6 700 ₽ <span>на группу</span></div>
+          <a class="hotel-card-link" href="https://www.booking.com/hotel/ge/golden-pheasant-tbilisi.ru.html?label=ru-tr-booking-desktop-2IxiyTyYkDONTo_xKiXFnwS652897959740%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-15349264036%3Alp1012764%3Ali%3Adec%3Adm&sid=1d6dc1b3dab767b92c6d076e172e5fc7&aid=2311236&ucfs=1&arphpl=1&checkin=2026-07-28&checkout=2026-07-29&group_adults=5&req_adults=5&no_rooms=1&group_children=0&req_children=0&all_sr_blocks=1435944207_415099876_4_0_0%2C1435944202_415099876_0_0_0&highlighted_blocks=1435944207_415099876_4_0_0%2C1435944202_415099876_0_0_0&matching_block_id=1435944207_415099876_4_0_0&sr_pri_blocks=1435944207_415099876_4_0_0%2C1435944202_415099876_0_0_0&from_list=1" target="_blank">Смотреть на Booking →</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 28–29 июля · Тбилиси -->
+    <div class="hotel-period">
+      <div class="hotel-period-title">🌙 28–29 июля · Тбилиси · 1 ночь (перед вылетом)</div>
+      <div class="hotel-cards">
+        <div class="hotel-card">
+          <span class="hotel-card-tag">Вариант 1</span>
+          <div class="hotel-card-name">Golden Pheasant Tbilisi</div>
+          <div class="hotel-card-price">6 700 ₽ <span>на группу</span></div>
+          <a class="hotel-card-link" href="https://www.booking.com/hotel/ge/golden-pheasant-tbilisi.html?ssne=%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%B8&ssne_untouched=%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%B8&highlighted_hotels=14359442&ss=%D0%A2%D0%B1%D0%B8%D0%BB%D0%B8%D1%81%D0%B8&dest_id=900047975&dest_type=city&hp_avform=1&origin=hp&do_availability_check=1&label=ru-tr-booking-desktop-2IxiyTyYkDONTo_xKiXFnwS652897959740%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-15349264036%3Alp1012764%3Ali%3Adec%3Adm&sid=1d6dc1b3dab767b92c6d076e172e5fc7&aid=2311236&lang=ru&sb=1&src_elem=sb&src=hotel&checkin=2026-07-28&checkout=2026-07-29&group_adults=5&no_rooms=1&group_children=0#_" target="_blank">Смотреть на Booking →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- END HOTELS -->
+
+<section id="excursions" class="section section-peach">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="block-label">Tripster</div>
+    <h2 class="block-title">Если не хочется за рулём</h2>
+    <p class="block-subtitle">Готовые экскурсии с гидом — на выбор по бюджету</p>
+
+    <div class="exc-grid">
+      <div class="exc-card" data-animate>
+        <span class="exc-day">День 2 · Кахетия</span>
+        <div class="exc-title">Вино и Сигнахи</div>
+        <div class="exc-option"><span>Эконом вариант</span><span class="exc-price"><a href="https://experience.tripster.ru/experience/54741/?rubric=ekslkursii-v-kahetiyu" target="_blank" style="color:var(--rose);">19€ (~1 700 ₽) →</a></span></div>
+        <div class="exc-option"><span>Стандарт</span><span class="exc-price"><a href="https://experience.tripster.ru/experience/44499/?rubric=ekslkursii-v-kahetiyu" target="_blank" style="color:var(--rose);">21€ (~1 900 ₽) →</a></span></div>
+        <div class="exc-option"><span>Премиум с дегустацией</span><span class="exc-price"><a href="https://experience.tripster.ru/experience/44922/?rubric=ekslkursii-v-kahetiyu" target="_blank" style="color:var(--rose);">60€ (~5 300 ₽) →</a></span></div>
+      </div>
+      <div class="exc-card" data-animate>
+        <span class="exc-day">День 3 · Казбеги</span>
+        <div class="exc-title">Горы и Гергети</div>
+        <div class="exc-option"><span>Бюджетный</span><span class="exc-price"><a href="https://experience.tripster.ru/experience/103627/?rubric=ekskursii-v-kazbegi" target="_blank" style="color:var(--rose);">14€ (~1 300 ₽) →</a></span></div>
+        <div class="exc-option"><span>Стандарт</span><span class="exc-price"><a href="https://experience.tripster.ru/experience/14746/?rubric=ekskursii-v-kazbegi" target="_blank" style="color:var(--rose);">17–21€ (~1 900 ₽) →</a></span></div>
+        <div class="exc-option"><span>Премиум (весь день)</span><span class="exc-price"><a href="https://experience.tripster.ru/experience/13693/?rubric=ekskursii-v-kazbegi" target="_blank" style="color:var(--rose);">193–218€ <span style="font-size:10px;color:var(--dusty);font-weight:400;">на группу</span> →</a></span></div>
+      </div>
+      <div class="exc-card" data-animate>
+        <span class="exc-day">День 4 · Кутаиси</span>
+        <div class="exc-title">Мастер-класс по грузинской кухне</div>
+        <div class="exc-option"><span>На 1 человека</span><span class="exc-price">45€ (~4 000 ₽)</span></div>
+        <div class="exc-option"><span>Формат</span><span style="font-size:12px;color:var(--text);">готовим хинкали, хачапури и пхали с местным шефом</span></div>
+        <div class="exc-option"><span>Когда</span><span style="font-size:12px;color:var(--text);">обед в день переезда в Кутаиси</span></div>
+        <div class="exc-option" style="border:none;"><span></span><a href="https://experience.tripster.ru/experience/22318/?rubric=master-classi" target="_blank" style="color:var(--rose);font-size:12px;font-weight:600;">Смотреть на Tripster →</a></div>
+      </div>
+
+      <div class="exc-card" data-animate>
+        <span class="exc-day">День 5 · Пещеры</span>
+        <div class="exc-title">Каньоны и Прометей</div>
+        <div class="exc-option"><span>Каньоны + пещера</span><span class="exc-price"><a href="https://experience.tripster.ru/experience/92304/?rubric=chto-eshe-posmotret" target="_blank" style="color:var(--rose);">70€ (~6 200 ₽) →</a></span></div>
+        <div class="exc-option"><span>Расширенный тур</span><span class="exc-price"><a href="https://experience.tripster.ru/experience/7535/?rubric=peshera-prometeya" target="_blank" style="color:var(--rose);">110€ (~9 800 ₽) <span style="font-size:10px;color:var(--dusty);font-weight:400;">на группу</span> →</a></span></div>
+        <div class="exc-option"><span>Премиум</span><span class="exc-price"><a href="https://experience.tripster.ru/experience/17018/?rubric=peshera-prometeya" target="_blank" style="color:var(--rose);">120€ (~10 600 ₽) <span style="font-size:10px;color:var(--dusty);font-weight:400;">на группу</span> →</a></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist" class="section section-white">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="block-label">Подготовка</div>
+    <h2 class="block-title">Паковать чемодан</h2>
+    <p class="block-subtitle">Что точно не забыть</p>
+
+    <div class="check-grid">
+      <div data-animate>
+        <h3>Документы и деньги</h3>
+        <div style="margin-top:16px;">
+          <div class="check-item"><div class="check-dot"></div><span>Загранпаспорт — действителен минимум 6 месяцев</span></div>
+          <div class="check-item"><div class="check-dot"></div><span>Наличные лари — в большинстве локаций карта не работает</span></div>
+          <div class="check-item"><div class="check-dot"></div><span>Карта UnionPay или наличные USD/EUR для обмена</span></div>
+          <div class="check-item"><div class="check-dot"></div><span>Страховой полис с покрытием активного отдыха</span></div>
+        </div>
+      </div>
+      <div data-animate>
+        <h3>Одежда и обувь</h3>
+        <div style="margin-top:16px;">
+          <div class="check-item"><div class="check-dot"></div><span>Кроссовки с хорошей подошвой — каньоны и горные тропы</span></div>
+          <div class="check-item"><div class="check-dot"></div><span>Лёгкий дождевик — в горах погода меняется за час</span></div>
+          <div class="check-item"><div class="check-dot"></div><span>Платок или шаль — для входа в монастыри (плечи и голова)</span></div>
+          <div class="check-item"><div class="check-dot"></div><span>Солнцезащитный крем SPF 50+ — в горах солнце жжёт сильнее</span></div>
+        </div>
+      </div>
+      <div data-animate>
+        <h3>Техника и разное</h3>
+        <div style="margin-top:16px;">
+          <div class="check-item"><div class="check-dot"></div><span>Повербанк — в горах нет розеток</span></div>
+          <div class="check-item"><div class="check-dot"></div><span>Google Maps офлайн или Maps.me — интернет есть не везде</span></div>
+          <div class="check-item"><div class="check-dot"></div><span>Сумка-шоппер для рынков и сувениров</span></div>
+          <div class="check-item"><div class="check-dot"></div><span>Наушники для переездов — день 7 это 4 часа в машине</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section section-peach">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="block-label">Вайб</div>
+    <h2 class="block-title">Вот за этим мы едем</h2>
+    <p class="block-subtitle" style="margin-bottom:32px;">Референсы и настроение поездки</p>
+    <div class="gallery">
+      <div class="gallery-item"><img src="грузия/еда/4MuQ7f82rbd3tmtfXGpwtN_small.jpg" alt="Еда"></div>
+      <div class="gallery-item"><img src="грузия/еда/FdrWvzmpgErRWGCu9kHNgz_wm.jpg" alt="Еда"></div>
+      <div class="gallery-item"><img src="грузия/еда/NxhmZ25fbX2DNFJKtydp5U_wm.jpg" alt="Еда"></div>
+      <div class="gallery-item"><img src="грузия/еда/RzwhBTQKucGzzmjsLtGdTr_wm.jpg" alt="Еда"></div>
+      <div class="gallery-item"><img src="грузия/еда/ZEz9S93aQ7j8NxJpZzUuCX_small.jpg" alt="Еда"></div>
+      <div class="gallery-item"><img src="грузия/еда/a4MJ5LvEf6JyZJx3UqnBSz_wm.jpg" alt="Еда"></div>
+      <div class="gallery-item"><img src="грузия/еда/d5fdvU7aWFAi4wi6EtJJnm_wm.jpg" alt="Еда"></div>
+      <div class="gallery-item"><img src="грузия/еда/gbXeixUMsps2x3YeKSSRwe_wm.jpg" alt="Еда"></div>
+      <div class="gallery-item"><img src="грузия/еда/ivWbh77MXuDrAEV2DhppRd_small.jpg" alt="Еда"></div>
+      <div class="gallery-item"><img src="грузия/еда/mWMNxiG7VQtzpAH5rzEQUC_wm.jpg" alt="Еда"></div>
+      <div class="gallery-item"><img src="грузия/еда/nUNiw6ZoWGnndy9qkdK7bG_wm.jpg" alt="Еда"></div>
+      <div class="gallery-item"><img src="грузия/khinkali.png" alt="Хинкали"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">Проект Грузия · Лето 2026</div>
+  <div style="font-size:15px;color:var(--dusty);font-family:'Cormorant Garamond',serif;font-style:italic;">Все вернутся с вином и фотографиями 🌸</div>
+  <div class="footer-links">
+    <a href="#route">Маршрут</a>
+    <a href="#days">По дням</a>
+    <a href="#budget">Бюджет</a>
+    <a href="#excursions">Экскурсии</a>
+    <a href="#checklist">Чеклист</a>
+  </div>
+</footer>
+
+<script>
+
+// PROGRESS BAR
+window.addEventListener('scroll',()=>{
+  const p=document.getElementById('prog');
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  p.style.width=(window.scrollY/h*100)+'%';
+},{passive:true});
+
+// ANIMATE ON SCROLL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:.15});
+document.querySelectorAll('[data-animate]').forEach(el=>obs.observe(el));
+
+// MAP DOTS — click to show popup
+const dotPopup={
+  d1:'p1',d2:'p2',d3:'p3',d4:'p4',d5:'p5',d6:'p6',d7:'p7',d8:'p8'
+};
+let activePop=null;
+
+// position popups relative to SVG
+function positionPopups(){
+  const svg=document.getElementById('mapSvg');
+  const wrap=document.getElementById('mapWrap');
+  const svgRect=svg.getBoundingClientRect();
+  const wrapRect=wrap.getBoundingClientRect();
+  const scale=svgRect.width/860;
+
+  const dotCoords={
+    p1:{x:120,y:175,side:'left'},
+    p2:{x:340,y:185,side:'right'},
+    p3:{x:650,y:105,side:'right'},
+    p4:{x:200,y:330,side:'left'},
+    p5:{x:500,y:360,side:'right'},
+    p6:{x:130,y:430,side:'left'},
+    p7:{x:680,y:545,side:'right'},
+    p8:{x:380,y:630,side:'center'},
+  };
+
+  Object.entries(dotCoords).forEach(([id,c])=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    const top=(svgRect.top-wrapRect.top)+c.y*scale-70;
+    el.style.top=top+'px';
+    if(c.side==='left'){el.style.left='10px';el.style.right='auto';el.style.transform='';}
+    else if(c.side==='right'){el.style.right='10px';el.style.left='auto';el.style.transform='';}
+    else{el.style.left='50%';el.style.right='auto';el.style.transform='translateX(-50%)';}
+  });
+}
+
+Object.keys(dotPopup).forEach(dotId=>{
+  const dot=document.getElementById(dotId);
+  if(!dot) return;
+  dot.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    const popId=dotPopup[dotId];
+    const pop=document.getElementById(popId);
+    if(activePop && activePop!==pop){activePop.classList.remove('active');}
+    pop.classList.toggle('active');
+    activePop=pop.classList.contains('active')?pop:null;
+    if(activePop) positionPopups();
+  });
+});
+
+document.addEventListener('click',()=>{
+  if(activePop){activePop.classList.remove('active');activePop=null;}
+});
+
+// ANIMATED CAR along road
+const carPts=[
+  {x:120,y:175},{x:220,y:190},{x:320,y:193},{x:440,y:175},
+  {x:560,y:140},{x:630,y:112},{x:650,y:105},{x:665,y:130},
+  {x:640,y:170},{x:560,y:195},{x:500,y:240},{x:380,y:300},
+  {x:250,y:320},{x:200,y:330},{x:350,y:360},{x:500,y:360},
+  {x:580,y:370},{x:300,y:430},{x:130,y:430},{x:100,y:490},
+  {x:380,y:535},{x:680,y:545},{x:380,y:630}
+];
+
+function lerp(a,b,t){return a+(b-a)*t;}
+
+function updateCar(){
+  const svg=document.getElementById('mapSvg');
+  const svgRect=svg.getBoundingClientRect();
+  const top=svgRect.top;
+  const bot=svgRect.bottom;
+  const vh=window.innerHeight;
+  const scrolled=Math.max(0,-top+vh*0.3);
+  const total=svgRect.height;
+  const ratio=Math.min(1,scrolled/total);
+  const idx=ratio*(carPts.length-1);
+  const i=Math.floor(idx);
+  const t=idx-i;
+  const p1=carPts[Math.min(i,carPts.length-1)];
+  const p2=carPts[Math.min(i+1,carPts.length-1)];
+  const x=lerp(p1.x,p2.x,t);
+  const y=lerp(p1.y,p2.y,t);
+  const angle=Math.atan2(p2.y-p1.y,p2.x-p1.x)*180/Math.PI;
+  document.getElementById('theCar').setAttribute('transform',`translate(${x},${y}) rotate(${angle})`);
+}
+
+window.addEventListener('scroll',updateCar,{passive:true});
+window.addEventListener('resize',()=>{positionPopups();updateCar();});
+setTimeout(()=>{positionPopups();updateCar();},400);
+
+
+// CAROUSEL
+const carState = {};
+function moveCarousel(id, dir) {
+  if (!carState[id]) carState[id] = { idx: 0 };
+  var total = document.querySelectorAll('#track-' + id + ' img').length || 4;
+  carState[id].idx = (carState[id].idx + dir + total) % total;
+  _updateCarousel(id);
+}
+function goToSlide(id, idx) {
+  if (!carState[id]) carState[id] = { idx: 0 };
+  carState[id].idx = idx;
+  _updateCarousel(id);
+}
+function _updateCarousel(id) {
+  const track = document.getElementById('track-' + id);
+  const dots  = document.querySelectorAll('#dots-' + id + ' .carousel-dot');
+  if (track) track.style.transform = 'translateX(-' + (carState[id].idx * 100) + '%)';
+  dots.forEach((d, i) => d.classList.toggle('active', i === carState[id].idx));
+}
+// stop carousel button clicks from bubbling to parent cards
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.carousel-btn')) e.stopPropagation();
+});
+
+</script>
+
+
+
+
+
+<script>
+(function() {
+  var caps = {
+    1: ['Парк Рике · Тбилиси', 'Мцхета', 'Хроника Грузии', 'Монастырь Джвари'],
+    2: ['Сигнахи', 'Кахетия', 'Квеври — 8 000 лет виноделия', 'Улочки Сигнахи'],
+    3: ['Военно-Грузинская дорога', 'Пейзажи Грузии', 'Крепость Ананури', 'Гергетская церковь · Казбеги'],
+    4: ['Столп Кацхи', 'Уплисцихе', 'Грузинская церковь', 'Фонтан Колхида · Кутаиси'],
+    5: ['Каньон Мартвили', 'Пещера Прометея', 'Пещера Прометея', 'Лодочная прогулка · Мартвили', 'Каньон Окаце'],
+    6: ['Монастырь Гелати', 'Термальные источники', 'Цхалтубо · заброшенные санатории', 'Монастырь Моцамета'],
+    7: ['Вардзия · XII век', 'Крепость Рабат · Ахалцихе', 'Боржоми', 'Вардзия · XII век'],
+    '8b': ['Серные бани · Абанотубани', 'Тбилисский пёс', 'Сувениры', 'Ресторан в Тбилиси'],
+    8: ['Аэропорт Тбилиси']
+  };
+
+  function initCaptions() {
+    [1,2,3,4,5,6,7,8].forEach(function(id) {
+      var track = document.getElementById('track-' + id);
+      if (!track) return;
+      var carousel = track.closest('.carousel');
+      if (!carousel) return;
+
+      // Создаём полосу подписи
+      var bar = document.createElement('div');
+      bar.className = 'carousel-caption-bar';
+      bar.id = 'cap-' + id;
+      bar.textContent = (caps[id] || [])[0] || '';
+      carousel.appendChild(bar);
+
+      // MutationObserver следит за классом active на точках
+      var dotsEl = document.getElementById('dots-' + id);
+      if (!dotsEl) return;
+
+      var observer = new MutationObserver(function() {
+        var dots = Array.from(dotsEl.querySelectorAll('.carousel-dot'));
+        var idx = dots.findIndex(function(d) { return d.classList.contains('active'); });
+        if (idx >= 0 && caps[id]) {
+          bar.textContent = caps[id][idx] || '';
+        }
+      });
+
+      observer.observe(dotsEl, { subtree: true, attributes: true, attributeFilter: ['class'] });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCaptions);
+  } else {
+    initCaptions();
+  }
+})();
+</script>
+</body>
+</html>
