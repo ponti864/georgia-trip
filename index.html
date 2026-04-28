@@ -1044,6 +1044,135 @@ footer{background:#F5EDE3;border-top:.5px solid rgba(242,212,220,.6);padding:28p
 </section>
 
 <!-- GALLERY -->
+
+<!-- PHRASEBOOK -->
+<section id="phrasebook" class="section section-mint">
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="block-label">Грузинский язык</div>
+    <h2 class="block-title">Разговорник</h2>
+    <p class="block-subtitle" style="margin-bottom:36px;">Самые нужные фразы — произношение и написание</p>
+
+    <style>
+      .pb-section { margin-bottom:36px; }
+      .pb-title { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:var(--brown); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+      .pb-table { width:100%; border-collapse:collapse; background:#fff; border-radius:16px; overflow:hidden; border:.5px solid rgba(184,216,200,.5); }
+      .pb-table th { background:rgba(184,216,200,.3); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#085041; padding:10px 16px; text-align:left; }
+      .pb-table td { padding:10px 16px; font-size:13px; color:var(--text); border-top:.5px solid rgba(184,216,200,.25); vertical-align:middle; }
+      .pb-table tr:hover td { background:rgba(184,216,200,.08); }
+      .pb-geo { font-family:serif; font-size:15px; color:var(--brown); }
+      .pb-pron { color:var(--rose); font-style:italic; }
+      @media(max-width:600px){ .pb-table th, .pb-table td { padding:8px 10px; font-size:12px; } }
+    </style>
+
+    <!-- Базовые фразы -->
+    <div class="pb-section">
+      <div class="pb-title">👋 Базовые фразы и этикет</div>
+      <table class="pb-table">
+        <tr><th>Русский</th><th>Произношение</th><th>Грузинский</th></tr>
+        <tr><td>Здравствуйте</td><td class="pb-pron">Гамарджо́ба</td><td class="pb-geo">გამარჯობა</td></tr>
+        <tr><td>До свидания</td><td class="pb-pron">Нахва́мдис</td><td class="pb-geo">ნახვამდის</td></tr>
+        <tr><td>Спасибо</td><td class="pb-pron">Мадло́ба</td><td class="pb-geo">მადლობა</td></tr>
+        <tr><td>Большое спасибо</td><td class="pb-pron">Ди́ди мадло́ба</td><td class="pb-geo">დიდი მადლობა</td></tr>
+        <tr><td>Пожалуйста (в ответ)</td><td class="pb-pron">Ара́прис</td><td class="pb-geo">არაფრის</td></tr>
+        <tr><td>Пожалуйста (просьба)</td><td class="pb-pron">Гтховт</td><td class="pb-geo">გთხოვთ</td></tr>
+        <tr><td>Да (вежливо / просто)</td><td class="pb-pron">Ди́ах / Ки</td><td class="pb-geo">დიახ / კი</td></tr>
+        <tr><td>Нет</td><td class="pb-pron">А́ра</td><td class="pb-geo">არა</td></tr>
+        <tr><td>Извините (привлечь внимание)</td><td class="pb-pron">Укацра́вад</td><td class="pb-geo">უკაცრავად</td></tr>
+        <tr><td>Извините (просьба простить)</td><td class="pb-pron">Боди́ши</td><td class="pb-geo">ბოდიში</td></tr>
+        <tr><td>Доброе утро</td><td class="pb-pron">Ди́ла мшвидоби́са</td><td class="pb-geo">დილა მშვიდობისა</td></tr>
+        <tr><td>Добрый вечер</td><td class="pb-pron">Сагха́мо мшвидоби́са</td><td class="pb-geo">საღამო მშვიდობისა</td></tr>
+      </table>
+    </div>
+
+    <!-- Ресторан -->
+    <div class="pb-section">
+      <div class="pb-title">🍽 В ресторане и кафе</div>
+      <table class="pb-table">
+        <tr><th>Русский</th><th>Произношение</th><th>Грузинский</th></tr>
+        <tr><td>Счет, пожалуйста</td><td class="pb-pron">Ангари́ши, гтховт</td><td class="pb-geo">ანგარიში, გთხოვთ</td></tr>
+        <tr><td>Очень вкусно</td><td class="pb-pron">Дзали́ан гемриели́а</td><td class="pb-geo">ძალიან გემრიელია</td></tr>
+        <tr><td>Меню, пожалуйста</td><td class="pb-pron">Меню́, гтховт</td><td class="pb-geo">მენიუ, გთხოვთ</td></tr>
+        <tr><td>Вода</td><td class="pb-pron">Цка́ли</td><td class="pb-geo">წყალი</td></tr>
+        <tr><td>Вино</td><td class="pb-pron">Гви́но</td><td class="pb-geo">ღვინო</td></tr>
+        <tr><td>Кофе</td><td class="pb-pron">Ка́ва</td><td class="pb-geo">ყავა</td></tr>
+        <tr><td>Чай</td><td class="pb-pron">Ча́и</td><td class="pb-geo">ჩაი</td></tr>
+        <tr><td>Без кинзы 🌿</td><td class="pb-pron">Ки́ндзис гаре́ше</td><td class="pb-geo">ქინძის გარეშე</td></tr>
+        <tr><td>Я не ем мясо</td><td class="pb-pron">Хо́рцс ар вчам</td><td class="pb-geo">ხორცს არ ვჭამ</td></tr>
+        <tr><td>У вас есть...?</td><td class="pb-pron">Га́квт...?</td><td class="pb-geo">გაქვთ...?</td></tr>
+        <tr><td>Ваше здоровье! (Тост)</td><td class="pb-pron">Гаума́рджос!</td><td class="pb-geo">გაუმარჯოს!</td></tr>
+      </table>
+    </div>
+
+    <!-- Навигация -->
+    <div class="pb-section">
+      <div class="pb-title">🧭 Навигация и покупки</div>
+      <table class="pb-table">
+        <tr><th>Русский</th><th>Произношение</th><th>Грузинский</th></tr>
+        <tr><td>Сколько стоит?</td><td class="pb-pron">Ра гирс?</td><td class="pb-geo">რა ღირს?</td></tr>
+        <tr><td>Где находится...?</td><td class="pb-pron">Сад а́рис...?</td><td class="pb-geo">სად არის...?</td></tr>
+        <tr><td>Где здесь туалет?</td><td class="pb-pron">Туале́ти сад а́рис?</td><td class="pb-geo">ტუალეტი სად არის?</td></tr>
+        <tr><td>Прямо</td><td class="pb-pron">Пи́рдапир</td><td class="pb-geo">პირდაპირ</td></tr>
+        <tr><td>Направо</td><td class="pb-pron">Ма́рджвнив</td><td class="pb-geo">მარჯვნივ</td></tr>
+        <tr><td>Налево</td><td class="pb-pron">Ма́рцхнив</td><td class="pb-geo">მარცხნივ</td></tr>
+        <tr><td>Остановите здесь, пожалуйста</td><td class="pb-pron">Ак гааче́рет, гтховт</td><td class="pb-geo">აქ გააჩერეთ, გთხოვთ</td></tr>
+        <tr><td>Можно оплатить картой?</td><td class="pb-pron">Барати́т гадахда шеидзле́ба?</td><td class="pb-geo">ბარათით გადახდა შეიძლება?</td></tr>
+      </table>
+    </div>
+
+    <!-- Коммуникация -->
+    <div class="pb-section">
+      <div class="pb-title">💬 Коммуникация</div>
+      <table class="pb-table">
+        <tr><th>Русский</th><th>Произношение</th><th>Грузинский</th></tr>
+        <tr><td>Я не понимаю</td><td class="pb-pron">Ар ме́смис</td><td class="pb-geo">არ მესმის</td></tr>
+        <tr><td>Вы говорите по-русски?</td><td class="pb-pron">Ици́т русу́ли?</td><td class="pb-geo">იცით რუსული?</td></tr>
+        <tr><td>Вы говорите по-английски?</td><td class="pb-pron">Ици́т инглису́ри?</td><td class="pb-geo">იცით ინგლისური?</td></tr>
+        <tr><td>Как дела?</td><td class="pb-pron">Рого́р харт?</td><td class="pb-geo">როგორ ხართ?</td></tr>
+        <tr><td>Всё хорошо</td><td class="pb-pron">Квелапе́ри карга́дaa</td><td class="pb-geo">ყველაფერი კარგადაა</td></tr>
+        <tr><td>Помогите, пожалуйста</td><td class="pb-pron">Дамехма́рет, гтховт</td><td class="pb-geo">დამეხმარეთ, გთხოვთ</td></tr>
+      </table>
+    </div>
+
+    <!-- Цифры -->
+    <div class="pb-section">
+      <div class="pb-title">🔢 Цифры 1–10</div>
+      <table class="pb-table">
+        <tr><th>Цифра</th><th>Произношение</th><th>Грузинский</th></tr>
+        <tr><td>1</td><td class="pb-pron">Э́рти</td><td class="pb-geo">ერთი</td></tr>
+        <tr><td>2</td><td class="pb-pron">О́ри</td><td class="pb-geo">ორი</td></tr>
+        <tr><td>3</td><td class="pb-pron">Са́ми</td><td class="pb-geo">სამი</td></tr>
+        <tr><td>4</td><td class="pb-pron">О́тхи</td><td class="pb-geo">ოთხი</td></tr>
+        <tr><td>5</td><td class="pb-pron">Ху́ти</td><td class="pb-geo">ხუთი</td></tr>
+        <tr><td>6</td><td class="pb-pron">Э́квси</td><td class="pb-geo">ექვსი</td></tr>
+        <tr><td>7</td><td class="pb-pron">Шви́ди</td><td class="pb-geo">შვიდი</td></tr>
+        <tr><td>8</td><td class="pb-pron">Рва</td><td class="pb-geo">რვა</td></tr>
+        <tr><td>9</td><td class="pb-pron">Цхра</td><td class="pb-geo">ცხრა</td></tr>
+        <tr><td>10</td><td class="pb-pron">А́ти</td><td class="pb-geo">ათი</td></tr>
+      </table>
+    </div>
+
+    <!-- Десятки -->
+    <div class="pb-section">
+      <div class="pb-title">🔢 Десятки и сотни</div>
+      <table class="pb-table">
+        <tr><th>Цифра</th><th>Произношение</th><th>Логика</th><th>Грузинский</th></tr>
+        <tr><td>20</td><td class="pb-pron">О́ци</td><td>просто "двадцать"</td><td class="pb-geo">ოცი</td></tr>
+        <tr><td>30</td><td class="pb-pron">О́цдаати</td><td>20 + 10</td><td class="pb-geo">ოცდაათი</td></tr>
+        <tr><td>40</td><td class="pb-pron">О́рмоци</td><td>2 × 20</td><td class="pb-geo">ორმოცი</td></tr>
+        <tr><td>50</td><td class="pb-pron">О́рмоцдаати</td><td>2 × 20 + 10</td><td class="pb-geo">ორმოცდაათი</td></tr>
+        <tr><td>60</td><td class="pb-pron">Са́моци</td><td>3 × 20</td><td class="pb-geo">სამოცი</td></tr>
+        <tr><td>70</td><td class="pb-pron">Са́моцдаати</td><td>3 × 20 + 10</td><td class="pb-geo">სამოცდაათი</td></tr>
+        <tr><td>80</td><td class="pb-pron">О́тхмоци</td><td>4 × 20</td><td class="pb-geo">ოთხმოცი</td></tr>
+        <tr><td>90</td><td class="pb-pron">О́тхмоцдаати</td><td>4 × 20 + 10</td><td class="pb-geo">ოთხმოცდაათი</td></tr>
+        <tr><td>100</td><td class="pb-pron">А́си</td><td>просто "сто"</td><td class="pb-geo">ასი</td></tr>
+      </table>
+    </div>
+
+  </div>
+</section>
+<!-- END PHRASEBOOK -->
+
+
 <section class="section section-peach">
   <div style="max-width:900px;margin:0 auto;">
     <div class="block-label">Вайб</div>
